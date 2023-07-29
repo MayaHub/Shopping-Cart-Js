@@ -54,8 +54,8 @@ let cart = [];
 function addProductToCart(productId) {
 
   const item = cart.find(item => item.productId === productId);
-  item ? increaseQuantity(productId) : cart.push({ quantity: 1, productId });
 
+  item ? increaseQuantity(productId) : cart.push({ quantity: 1, productId });
 }
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
@@ -124,12 +124,17 @@ function emptyCart() {
 
 function pay(amount) {
 
-  /* chat gpt */
+  /*Me - third time */
+  const change = amount - cartTotal();
+
+  /* chat gpt 
   const cartTotal = cartTotal();
   change = amount - cartTotal;
+  */
 
+  //this is part of the chatgpt also
 if (change >= 0) {
-  return change;
+  return "Your change is:", change;
 } else {
   return "Remaining balance to be paid:", Math.abs(change);
 }
