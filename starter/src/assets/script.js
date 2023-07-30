@@ -53,9 +53,41 @@ let cart = [];
 
 function addProductToCart(productId) {
 
-  const item = cart.find(item => item.productId === productId);
+  for (const product of products) {
 
-  item ? increaseQuantity(productId) : cart.push({ quantity: 1, productId });
+    if(product.productId === productId) {
+
+       const item = {
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity,
+        productId: product.productId,
+        image: product.image,
+      };
+
+      const presentItem = cart.findIndex((p) => p.productId === productId);
+
+      if (presentItem !== -1) {
+        increaseQuantity(productId)
+      } else {
+        cart.push(item);
+        increaseQuantity(productId);
+      }
+    }
+
+  }
+  // product = cart.find(product => product.productId === productId);
+  // product ? increaseQuantity(productId) : cart.push(product);
+
+
+  /*Second try */
+  // let product = products.find(product => product.productId === productId);
+  // product = cart.find(product => product.productId === productId);
+  // product ? increaseQuantity(productId) : cart.push({ product, productId, quantity: 1 });
+
+  /*First try */
+  // const item = cart.find(item => item.productId === productId);
+  // item ? increaseQuantity(productId) : cart.push({ quantity: 1, productId });
 }
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
@@ -77,10 +109,8 @@ function increaseQuantity(productId) {
 function decreaseQuantity(productId) {
 
   const item = cart.find((item) => item.productId === productId);
-    if (item.quantity <= 1) {
-      removeProductFromCart(productId);
-    }
-    item.quantity--;
+
+  item.quantity <= 1 ? removeProductFromCart(productId) : item.quantity--;
 }
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -107,7 +137,7 @@ function cartTotal() {
     total += quantity * price;
   }
   //return the sum of the products in the cart
-  return total;
+  return total.toFixed(2);
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
@@ -125,7 +155,13 @@ function emptyCart() {
 function pay(amount) {
 
   /*Me - third time */
-  const change = amount - cartTotal();
+
+  const bill = amount - cartTotal();
+  return bill.toFixed(2);
+
+  // if (change <0) {
+  //   return -(change);
+  // }
 
   /* chat gpt 
   const cartTotal = cartTotal();
@@ -133,11 +169,11 @@ function pay(amount) {
   */
 
   //this is part of the chatgpt also
-if (change >= 0) {
-  return "Your change is:", change;
-} else {
-  return "Remaining balance to be paid:", Math.abs(change);
-}
+// if (change >= 0) {
+//   return "Your change is:", change;
+// } else {
+//   return "Remaining balance to be paid:", Math.abs(change);
+// }
 
   /* second try */
   // const total = cart.forEach(item => item.price += total);
