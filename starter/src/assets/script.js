@@ -12,7 +12,7 @@
 const cherry = {
   name: "cherries",
   price: 3.99,
-  quantity: 0,
+  quantity: 1,
   productId: 101,
   image: (url = "images/cherry.jpg"),
 };
@@ -20,7 +20,7 @@ const cherry = {
 const orange = {
   name: "orange",
   price: 2.99,
-  quantity: 0,
+  quantity: 1,
   productId: 102,
   image: (url = "images/orange.jpg"),
 };
@@ -28,7 +28,7 @@ const orange = {
 const strawberry = {
   name: "strawberries",
   price: 4.99,
-  quantity: 0,
+  quantity: 1,
   productId: 103,
   image: (url = "images/strawberry.jpg"),
 };
@@ -57,37 +57,16 @@ function addProductToCart(productId) {
 
     if(product.productId === productId) {
 
-       const item = {
-        name: product.name,
-        price: product.price,
-        quantity: product.quantity,
-        productId: product.productId,
-        image: product.image,
-      };
-
       const presentItem = cart.findIndex((p) => p.productId === productId);
 
       if (presentItem !== -1) {
         increaseQuantity(productId)
       } else {
-        cart.push(item);
-        increaseQuantity(productId);
+        cart.push(product);
+        // increaseQuantity(productId);
       }
     }
-
   }
-  // product = cart.find(product => product.productId === productId);
-  // product ? increaseQuantity(productId) : cart.push(product);
-
-
-  /*Second try */
-  // let product = products.find(product => product.productId === productId);
-  // product = cart.find(product => product.productId === productId);
-  // product ? increaseQuantity(productId) : cart.push({ product, productId, quantity: 1 });
-
-  /*First try */
-  // const item = cart.find(item => item.productId === productId);
-  // item ? increaseQuantity(productId) : cart.push({ quantity: 1, productId });
 }
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
@@ -108,8 +87,7 @@ function increaseQuantity(productId) {
 
 function decreaseQuantity(productId) {
 
-  const item = cart.find((item) => item.productId === productId);
-
+  const item = cart.find(item => item.productId === productId);
   item.quantity <= 1 ? removeProductFromCart(productId) : item.quantity--;
 }
 
@@ -121,7 +99,7 @@ function decreaseQuantity(productId) {
 
 function removeProductFromCart(productId) {
 
-  cart = cart.filter((item) => item.productId !== productId);
+  cart = cart.filter(item => item.productId !== productId);
 }
 
 /* Create a function named cartTotal that has no parameters
