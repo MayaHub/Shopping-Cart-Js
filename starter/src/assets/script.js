@@ -53,17 +53,21 @@ let cart = [];
 
 function addProductToCart(productId) {
 
+  //look in product array to see if product exists
   for (const product of products) {
 
+    //if it is found
     if(product.productId === productId) {
 
+      //new object to represent item
       const presentItem = cart.findIndex((p) => p.productId === productId);
 
+      //if item is present, increase quantity
       if (presentItem !== -1) {
         increaseQuantity(productId)
-      } else {
+
+      } else { //if not, add it to the cart
         cart.push(product);
-        // increaseQuantity(productId);
       }
     }
   }
@@ -97,14 +101,6 @@ function decreaseQuantity(productId) {
       removeProductFromCart(productId);
     }
   }
-
-
-
-
-  // item.quantity <= 1 ? removeProductFromCart(productId) : item.quantity--;
-  // if (item.quantity === 0) {
-  //   removeProductFromCart(productId);
-  // }
 }
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -115,8 +111,10 @@ function decreaseQuantity(productId) {
 
 function removeProductFromCart(productId) {
 
+  //find index of product
   const itemIndex = cart.findIndex(p => p.productId === productId);
 
+  //if the product exists, cut it out
   if (itemIndex !== -1) {
     cart.splice(itemIndex, 1);
   }
@@ -135,13 +133,14 @@ function cartTotal() {
     total += quantity * price;
   }
   //return the sum of the products in the cart
+  
+  //cast to Number to prevent string representation of number
   return Number(total.toFixed(2));
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
 
 function emptyCart() {
-  //dump products from cart
   cart = [];
 }
 
@@ -152,38 +151,8 @@ function emptyCart() {
 
 function pay(amount) {
 
-  /*Me - third time */
-
   const bill = amount - cartTotal();
   return Number(bill.toFixed(2));
-
-  // if (change <0) {
-  //   return -(change);
-  // }
-
-  /* chat gpt 
-  const cartTotal = cartTotal();
-  change = amount - cartTotal;
-  */
-
-  //this is part of the chatgpt also
-// if (change >= 0) {
-//   return "Your change is:", change;
-// } else {
-//   return "Remaining balance to be paid:", Math.abs(change);
-// }
-
-  /* second try */
-  // const total = cart.forEach(item => item.price += total);
-  // amount >= total ? amount - total : total - amount;
-
-  /* first try
-  if (amount > balance) {
-    return amount - balance;
-  } else {
-    return balance - amount;
-  }
-  */
 }
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
