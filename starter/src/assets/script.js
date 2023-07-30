@@ -87,8 +87,24 @@ function increaseQuantity(productId) {
 
 function decreaseQuantity(productId) {
 
+  //Look in the cart to locate the item
   const item = cart.find(item => item.productId === productId);
-  item.quantity <= 1 ? removeProductFromCart(productId) : item.quantity--;
+
+  //if the item is found
+  if (item && item.quantity > 0) {
+    item.quantity--;
+    if (item.quantity === 0) {
+      removeProductFromCart(productId);
+    }
+  }
+
+
+
+
+  // item.quantity <= 1 ? removeProductFromCart(productId) : item.quantity--;
+  // if (item.quantity === 0) {
+  //   removeProductFromCart(productId);
+  // }
 }
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -99,7 +115,11 @@ function decreaseQuantity(productId) {
 
 function removeProductFromCart(productId) {
 
-  cart = cart.filter(item => item.productId !== productId);
+  const itemIndex = cart.findIndex(p => p.productId === productId);
+
+  if (itemIndex !== -1) {
+    cart.splice(itemIndex, 1);
+  }
 }
 
 /* Create a function named cartTotal that has no parameters
