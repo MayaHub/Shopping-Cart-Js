@@ -135,7 +135,7 @@ function cartTotal() {
     total += quantity * price;
   }
   //return the sum of the products in the cart
-  return total.toFixed(2);
+  return Number(total.toFixed(2));
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
@@ -155,7 +155,7 @@ function pay(amount) {
   /*Me - third time */
 
   const bill = amount - cartTotal();
-  return bill.toFixed(2);
+  return Number(bill.toFixed(2));
 
   // if (change <0) {
   //   return -(change);
