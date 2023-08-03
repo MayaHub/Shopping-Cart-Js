@@ -62,13 +62,8 @@ function addProductToCart(productId) {
       //new object to represent item
       const presentItem = cart.findIndex((p) => p.productId === productId);
 
-      //if item is present, increase quantity
-      if (presentItem !== -1) {
-        increaseQuantity(productId)
-
-      } else { //if not, add it to the cart
-        cart.push(product);
-      }
+      //if item is present, increase quantity. If not, add to cart.
+      presentItem !== -1 ? increaseQuantity(productId) : cart.push(product);
     }
   }
 }
